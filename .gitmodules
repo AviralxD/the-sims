@@ -1,0 +1,3 @@
+[submodule "week_one/so-100"]
+	path = week_one/so-100
+	url = https://github.com/TheRobotStudio/SO-ARM100.git
