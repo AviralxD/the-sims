@@ -1,3 +1,6 @@
 [submodule "week_one/so-100"]
 	path = week_one/so-100
 	url = https://github.com/TheRobotStudio/SO-ARM100.git
+[submodule "week_one/pupper_ros"]
+	path = week_one/pupper_ros
+	url = https://github.com/chandyalex/stanford_pupper_description.git
