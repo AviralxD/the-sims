@@ -1,0 +1,179 @@
+<mujoco model="stanford_pupper">
+  <default>
+    <default class="robot">
+      <default class="motor">
+        <joint />
+        <motor />
+      </default>
+      <default class="visual">
+        <geom material="visualgeom" contype="0" conaffinity="0" group="2" />
+      </default>
+      <default class="collision">
+        <geom material="collision_material" condim="3" contype="0" conaffinity="1" priority="1" group="1" solref="0.005 1" solimp="0.99 0.999 1e-05" friction="1 0.01 0.01" />
+      </default>
+    </default>
+  </default>
+
+<compiler angle="radian" meshdir="../meshes"/>
+
+  <asset>
+    <material name="defualt_material" rgba="0.0980392156862745 0.0980392156862745 0.0980392156862745 1" />
+    <material name="default_material" rgba="0.7 0.7 0.7 1" />
+    <material name="collision_material" rgba="1.0 0.28 0.1 0.9" />
+    
+    <mesh name="base_link.STL" file="base_link.STL" />
+    <mesh name="LF_HIP.STL" file="LF_HIP.STL" />
+    <mesh name="LF_THIGH.STL" file="LF_THIGH.STL" />
+    <mesh name="LF_THIGH_FOOT.STL" file="LF_THIGH_FOOT.STL" />
+    <mesh name="RF_HIP.STL" file="RF_HIP.STL" />
+    <mesh name="RF_THIGH.STL" file="RF_THIGH.STL" />
+    <mesh name="RF_THIGH_FOOT.STL" file="RF_THIGH_FOOT.STL" />
+    <mesh name="LH_HIP.STL" file="LH_HIP.STL" />
+    <mesh name="LH_THIGH.STL" file="LH_THIGH.STL" />
+    <mesh name="LH_THIGH_FOOT.STL" file="LH_THIGH_FOOT.STL" />
+    <mesh name="RH_HIP.STL" file="RH_HIP.STL" />
+    <mesh name="RH_THIGH.STL" file="RH_THIGH.STL" />
+    <mesh name="RH_THIGH_FOOT.STL" file="RH_THIGH_FOOT.STL" />
+    
+    <mesh name="hokuyo_utm_30lx" file="../../hector_models/hector_sensors_description/meshes/hokuyo_utm30lx/hokuyo_utm_30lx.stl" />
+    <mesh name="asus_camera_simple" file="../../hector_models/hector_sensors_description/meshes/asus_camera/asus_camera_simple.stl" />
+  </asset>
+
+  <worldbody>
+    <body name="base_link" pos="0.00000000 0.00000000 0.20983724" quat="1 0 0 0" childclass="robot">
+      <freejoint name="floating_base" />
+      <geom name="base_link_collision" pos="0 0 0" quat="1.0 0.0 0.0 0.0" type="mesh" mesh="base_link.STL" class="collision" />
+      <geom name="base_link_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="" type="mesh" mesh="base_link.STL" class="visual" />
+      <body name="LF_HIP" pos="0.0705 0.04 0.02425" quat="1.0 0.0 0.0 0.0">
+        <joint name="LF_HIP_JOINT" type="hinge" ref="0.0" class="motor" range="-3.14 3.14" axis="1 0 0" />
+        <inertial pos="0.03672908 0.02740814 0.00118127" quat="1.0 0.0 0.0 0.0" mass="0.09551479" diaginertia="8.36683671180298e-05 5.289856175366819e-05 0.00010700079967936377" />
+        <geom name="LF_HIP_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="" type="mesh" mesh="LF_HIP.STL" class="visual" />
+        <body name="LF_THIGH" pos="0.02735 0.029523 0.0012724" quat="0.9739502088809489 0.04458903125306847 0.21877497277321645 0.039627265875245135">
+          <joint name="LF_THIGH_JOINT" type="hinge" ref="0.0" class="motor" range="-3.14 3.14" axis="0 1 0" />
+          <inertial pos="-0.04486232 -0.00163039 -0.02816178" quat="1.0 0.0 0.0 0.0" mass="0.00699575" diaginertia="4.011071699334492e-06 1.1878402750199946e-05 8.333714363349829e-06" />
+          <geom name="LF_THIGH_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="" type="mesh" mesh="LF_THIGH.STL" class="visual" />
+          <body name="LF_THIGH_FOOT" pos="0.022028 0.0023333 -0.12152" quat="0.923878673340547 -1.9879135021187245e-06 -0.38268550656982964 1.9879135021187253e-06">
+            <joint name="LF_THIGH_FOOT_JOINT" type="hinge" ref="0.0" class="motor" range="-3.14 3.14" axis="0 1 0" />
+            <inertial pos="0.04002073 0.00580157 -0.02456342" quat="1.0 0.0 0.0 0.0" mass="0.00294875" diaginertia="1.7657563311842582e-06 6.375349389948617e-06 4.649776510347592e-06" />
+            <geom name="LF_THIGH_FOOT_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="" type="mesh" mesh="LF_THIGH_FOOT.STL" class="visual" />
+            <body name="LF_TOE" pos="-0.01 0 -0.116" quat="1.0 0.0 0.0 0.0">
+              <inertial pos="0 0 0" quat="1.0 0.0 0.0 0.0" mass="0.002" diaginertia="2e-08 2e-08 2e-08" />
+              <geom name="LF_TOE_collision" pos="0 0 0" quat="1.0 0.0 0.0 0.0" type="sphere" size="0.005" class="collision" />
+              <geom name="LF_TOE_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="default_material" type="sphere" size="0.005" class="visual" />
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="RF_HIP" pos="0.0705 -0.04 0.02425" quat="1.0 0.0 0.0 0.0">
+        <joint name="RF_HIP_JOINT" type="hinge" ref="0.0" class="motor" range="-3.14 3.14" axis="1 0 0" />
+        <inertial pos="0.03672910 -0.02740818 0.00118127" quat="1.0 0.0 0.0 0.0" mass="0.09551481" diaginertia="8.36683846374877e-05 5.289857283018561e-05 0.00010700082208443836" />
+        <geom name="RF_HIP_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="" type="mesh" mesh="RF_HIP.STL" class="visual" />
+        <body name="RF_THIGH" pos="0.02735 -0.029523 0.0012724" quat="0.9739502088809489 -0.04458903125306847 0.21877497277321645 -0.039627265875245135">
+          <joint name="RF_THIGH_JOINT" type="hinge" ref="0.0" class="motor" range="-3.14 3.14" axis="0 1 0" />
+          <inertial pos="-0.04407832 -0.00075984 -0.02770708" quat="1.0 0.0 0.0 0.0" mass="0.00716529" diaginertia="4.19386946486895e-06 1.2104016236055651e-05 8.683526344065076e-06" />
+          <geom name="RF_THIGH_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="" type="mesh" mesh="RF_THIGH.STL" class="visual" />
+          <body name="RF_THIGH_FOOT" pos="0.022028 -0.0023333 -0.12152" quat="0.923878673340547 1.9879135021187245e-06 -0.38268550656982964 -1.9879135021187253e-06">
+            <joint name="RF_THIGH_FOOT_JOINT" type="hinge" ref="0.0" class="motor" range="-3.14 3.14" axis="0 1 0" />
+            <inertial pos="0.04002067 -0.00366667 -0.02497144" quat="1.0 0.0 0.0 0.0" mass="0.00294875" diaginertia="1.7524924876914674e-06 6.381194355258551e-06 4.6306677015448675e-06" />
+            <geom name="RF_THIGH_FOOT_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="" type="mesh" mesh="RF_THIGH_FOOT.STL" class="visual" />
+            <body name="RF_TOE" pos="-0.01 0 -0.116" quat="1.0 0.0 0.0 0.0">
+              <inertial pos="0 0 0" quat="1.0 0.0 0.0 0.0" mass="0.002" diaginertia="2e-08 2e-08 2e-08" />
+              <geom name="RF_TOE_collision" pos="0 0 0" quat="1.0 0.0 0.0 0.0" type="sphere" size="0.005" class="collision" />
+              <geom name="RF_TOE_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="default_material" type="sphere" size="0.005" class="visual" />
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="LH_HIP" pos="-0.1299 0.04 0.02425" quat="1.0 0.0 0.0 0.0">
+        <joint name="LH_HIP_JOINT" type="hinge" ref="0.0" class="motor" range="-3.14 3.14" axis="1 0 0" />
+        <inertial pos="0.03712908 0.02740814 0.00118127" quat="1.0 0.0 0.0 0.0" mass="0.09551479" diaginertia="8.36683671180298e-05 5.289856175366819e-05 0.00010700079967936377" />
+        <geom name="LH_HIP_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="" type="mesh" mesh="LH_HIP.STL" class="visual" />
+        <body name="LH_THIGH" pos="0.02775 0.029523 0.0012724" quat="0.9739502088809489 0.04458903125306847 0.21877497277321645 0.039627265875245135">
+          <joint name="LH_THIGH_JOINT" type="hinge" ref="0.0" class="motor" range="-3.14 3.14" axis="0 1 0" />
+          <inertial pos="-0.04407853 -0.00162684 -0.02766984" quat="1.0 0.0 0.0 0.0" mass="0.00716530" diaginertia="4.108284608117991e-06 1.2166289422293203e-05 8.53569145948762e-06" />
+          <geom name="LH_THIGH_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="" type="mesh" mesh="LH_THIGH.STL" class="visual" />
+          <body name="LH_THIGH_FOOT" pos="0.022028 0.0026233 -0.12152" quat="0.923878673340547 -1.9879135021187245e-06 -0.38268550656982964 1.9879135021187253e-06">
+            <joint name="LH_THIGH_FOOT_JOINT" type="hinge" ref="0.0" class="motor" range="-3.14 3.14" axis="0 1 0" />
+            <inertial pos="0.04002073 0.00551265 -0.02458837" quat="1.0 0.0 0.0 0.0" mass="0.00294875" diaginertia="1.7657563353229885e-06 6.375349389948617e-06 4.649776514486322e-06" />
+            <geom name="LH_THIGH_FOOT_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="" type="mesh" mesh="LH_THIGH_FOOT.STL" class="visual" />
+            <body name="LH_TOE" pos="-0.01 0 -0.116" quat="1.0 0.0 0.0 0.0">
+              <inertial pos="0 0 0" quat="1.0 0.0 0.0 0.0" mass="0.002" diaginertia="2e-08 2e-08 2e-08" />
+              <geom name="LH_TOE_collision" pos="0 0 0" quat="1.0 0.0 0.0 0.0" type="sphere" size="0.005" class="collision" />
+              <geom name="LH_TOE_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="default_material" type="sphere" size="0.005" class="visual" />
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="RH_HIP" pos="0.0705 -0.04 0.02425" quat="1.0 0.0 0.0 0.0">
+        <joint name="RH_HIP_JOINT" type="hinge" ref="0.0" class="motor" range="-3.14 3.14" axis="1 0 0" />
+        <inertial pos="-0.163418681352713 -0.0426100217140138 0.00185777526130817" quat="1.0 0.0 0.0 0.0" mass="0.09551481" diaginertia="8.36683846374877e-05 5.289856462259541e-05 0.00010700081387684817" />
+        <geom name="RH_HIP_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="" type="mesh" mesh="RH_HIP.STL" class="visual" />
+        <body name="RH_THIGH" pos="-0.17265 -0.029523 0.0012724" quat="0.9739502088809489 -0.04458903125306847 0.21877497277321645 -0.039627265875245135">
+          <joint name="RH_THIGH_JOINT" type="hinge" ref="0.0" class="motor" range="-3.14 3.14" axis="0 1 0" />
+          <inertial pos="-0.04407832 0.00162685 -0.02766971" quat="1.0 0.0 0.0 0.0" mass="0.00716529" diaginertia="4.108278874534459e-06 1.2166272442837462e-05 8.535679546948776e-06" />
+          <geom name="RH_THIGH_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="" type="mesh" mesh="RH_THIGH.STL" class="visual" />
+          <body name="RH_THIGH_FOOT" pos="0.022028 -0.0025833 -0.12152" quat="0.923878673340547 1.9879135021187245e-06 -0.38268550656982964 -1.9879135021187253e-06">
+            <joint name="RH_THIGH_FOOT_JOINT" type="hinge" ref="0.0" class="motor" range="-3.14 3.14" axis="0 1 0" />
+            <inertial pos="0.04002067 -0.00341667 -0.02497144" quat="1.0 0.0 0.0 0.0" mass="0.00294875" diaginertia="1.7524924876914674e-06 6.381194355258551e-06 4.6306677015448675e-06" />
+            <geom name="RH_THIGH_FOOT_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="" type="mesh" mesh="RH_THIGH_FOOT.STL" class="visual" />
+            <body name="RH_TOE" pos="-0.01 0 -0.116" quat="1.0 0.0 0.0 0.0">
+              <inertial pos="0 0 0" quat="1.0 0.0 0.0 0.0" mass="0.002" diaginertia="2e-08 2e-08 2e-08" />
+              <geom name="RH_TOE_collision" pos="0 0 0" quat="1.0 0.0 0.0 0.0" type="sphere" size="0.005" class="collision" />
+              <geom name="RH_TOE_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="default_material" type="sphere" size="0.005" class="visual" />
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="imu_link" pos="0 0 0" quat="1 0 0 0">
+        <inertial pos="0 0 0" quat="1.0 0.0 0.0 0.0" mass="0.001" diaginertia="1e-09 1e-09 1e-09" />
+      </body>
+      <body name="hokuyo_frame" pos="-0.05 0.0 0.1" quat="1.0 0.0 0.0 0.0">
+        <inertial pos="0 0 0" quat="1.0 0.0 0.0 0.0" mass="0.270" diaginertia="0.0002632 0.0002632 0.000162" />
+        <geom name="hokuyo_frame_collision" pos="0 0 -0.0115" quat="1.0 0.0 0.0 0.0" type="box" size="0.029 0.029 0.0435" class="collision" />
+        <geom name="hokuyo_frame_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="default_material" type="mesh" mesh="hokuyo_utm_30lx" class="visual" />
+      </body>
+      <body name="camera_link" pos="0.098 0.0 0.082" quat="1.0 0.0 0.0 0.0">
+        <inertial pos="0 0 0" quat="1.0 0.0 0.0 0.0" mass="0.200" diaginertia="0.00058083 3.0833e-05 0.00059083" />
+        <geom name="camera_link_collision" pos="0 0 0" quat="1.0 0.0 0.0 0.0" type="mesh" mesh="asus_camera_simple" class="collision" />
+        <geom name="camera_link_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="default_material" type="mesh" mesh="asus_camera_simple" class="visual" />
+        <body name="camera_depth_frame" pos="0.0 0.049 0.0" quat="1.0 0.0 0.0 0.0">
+          <body name="camera_depth_optical_frame" pos="0 0 0" quat="0.5000000000000001 -0.5000000000000001 0.5000000000000001 -0.5000000000000001" />
+        </body>
+        <body name="camera_rgb_frame" pos="0.0 0.022 0.0" quat="1.0 0.0 0.0 0.0">
+          <body name="camera_rgb_optical_frame" pos="0 0 0" quat="0.5000000000000001 -0.5000000000000001 0.5000000000000001 -0.5000000000000001" />
+        </body>
+      </body>
+      <site name="base_link_site" pos="0 0 0" quat="1 0 0 0" />
+      <camera name="front_camera" mode="track" fovy="90.0" quat="4.329637285359678e-17 4.329637285359677e-17 0.7071067811865475 0.7071067811865476" pos="0.0 2.0 0.5" />
+      <camera name="side_camera" mode="track" fovy="90.0" quat="-0.5 -0.4999999999999999 0.5 0.5000000000000001" pos="-2.0 0.0 0.5" />
+    </body>
+  </worldbody>
+
+  <actuator>
+    <motor name="LF_HIP_JOINT_ctrl" joint="LF_HIP_JOINT" class="motor" />
+    <motor name="LF_THIGH_JOINT_ctrl" joint="LF_THIGH_JOINT" class="motor" />
+    <motor name="LF_THIGH_FOOT_JOINT_ctrl" joint="LF_THIGH_FOOT_JOINT" class="motor" />
+    <motor name="RF_HIP_JOINT_ctrl" joint="RF_HIP_JOINT" class="motor" />
+    <motor name="RF_THIGH_JOINT_ctrl" joint="RF_THIGH_JOINT" class="motor" />
+    <motor name="RF_THIGH_FOOT_JOINT_ctrl" joint="RF_THIGH_FOOT_JOINT" class="motor" />
+    <motor name="LH_HIP_JOINT_ctrl" joint="LH_HIP_JOINT" class="motor" />
+    <motor name="LH_THIGH_JOINT_ctrl" joint="LH_THIGH_JOINT" class="motor" />
+    <motor name="LH_THIGH_FOOT_JOINT_ctrl" joint="LH_THIGH_FOOT_JOINT" class="motor" />
+    <motor name="RH_HIP_JOINT_ctrl" joint="RH_HIP_JOINT" class="motor" />
+    <motor name="RH_THIGH_JOINT_ctrl" joint="RH_THIGH_JOINT" class="motor" />
+    <motor name="RH_THIGH_FOOT_JOINT_ctrl" joint="RH_THIGH_FOOT_JOINT" class="motor" />
+  </actuator>
+
+  <contact>
+    <exclude body1="base_link" body2="hokuyo_frame" />
+    <exclude body1="base_link" body2="camera_link" />
+  </contact>
+
+  <sensor>
+    <framepos name="base_link_site_pos" objtype="site" objname="base_link_site" />
+    <framequat name="base_link_site_quat" objtype="site" objname="base_link_site" />
+    <framelinvel name="base_link_site_linvel" objtype="site" objname="base_link_site" />
+    <frameangvel name="base_link_site_angvel" objtype="site" objname="base_link_site" />
+    <velocimeter name="base_link_site_vel" site="base_link_site" />
+  </sensor>
+</mujoco>
