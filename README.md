@@ -11,12 +11,13 @@
 ### Getting Started with the setup
 
 1. Clone the repo
-    > git clone --recurse-submodules https://github.com/AviralxD/the-sims.git
+    ```
+    git clone --recurse-submodules https://github.com/AviralxD/the-sims.git 
+    ```
 
     You can also [fork the repo](https://docs.github.com/en/get-started/quickstart/fork-a-repo), in that case be sure to ``` git fetch ``` the latest changes.
 
-2. Download mujoco and try loading some examples in the default viewer.
-    > [mujoco.org/download](https://mujoco.org/download)
+2. [Download mujoco](https://mujoco.org/download) and try loading some examples in the default viewer.    
 
 3. Convert the urdf to mjcf, you can use [this repo](https://github.com/kscalelabs/urdf2mjcf). Try to mess around with the generated xml to understand how the mjcf format works. 
 
@@ -52,3 +53,30 @@ with mujoco.viewer.launch_passive(model, data) as viewer:
 - [mujoco_menagerie](https://github.com/google-deepmind/mujoco_menagerie/): compilation of mjcf files for various robots
 - [urdf2mjcf](https://github.com/kscalelabs/urdf2mjcf): urdf to mujoco converter
 - [mujoco_ros_pkgs](https://github.com/ubi-agni/mujoco_ros_pkgs.git): ROS1 wrapper for mujoco
+
+
+## WEEK TWO
+
+### The tasks for week one are as follows:
+1. Study rotations, forward and inverse kinematics from the provided resources.
+2. Derive forward kinematics for the bots, write a function to get coordinates of the end-effector.
+3. Write an IK solver by deriving the equations geometrically, limit yourself to 3 DOF.
+4. Exercise:
+    ```
+    For the SO-100, restrict the arm to 3 DOF by fixing the wrist and lower arm joint angles.
+
+    Given a set of points, make the end effector go through these points via a cubic spline.
+    ```
+
+    ```
+    For the Pupper, implement sine wave gait which varies the X and Z coordinates of the foot sinusoidally wrt time.
+
+    Provide phase offsets to each leg and make the dog walk.
+    ```
+5. Try to implement an iterative solver for your bot, and compare it with the geometrically derived alternative.
+
+### Resources:
+- [Arjun's Glorious LaTeX](week_two/arcnotes-1.pdf)
+- [Interactive example](https://colab.research.google.com/drive/1tBGomuO8bikq8HZdewz6MfyMwaD0IQnb?usp=sharing)
+- [A Mathematical Introduction to
+Robotic Manipulation](week_two/mls94-complete.pdf): After completing the tasks, go through the first three chapters thoroughly.
